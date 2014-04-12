@@ -60,22 +60,29 @@ directory of this project when you run ``rebar get-deps``:
 
 Dependencies not installed automatically:
 
-* `kerl`_
 * `lfetool`_
-* `Erjang`_ (Erlang on the JVM; easily installable with `lfetool`_)
+* `kerl`_ (see below)
+* `Erjang`_ (see below)
 * `rlwrap`_ (``readline`` support for the Erjang shell; installable on many
-  linux distros and on Mac OS X with `Homebrew`_)
+  linux distros; on Mac OS X, install with `Homebrew`_)
 
-Erjang installation is this easy:
+If you don't have ``kerl`` and Erlang installed:
 
 .. code:: bash
 
+    $ lfetool install kerl
+    $ lfetool install erlang R16B
     $ . /opt/erlang/R16B/activate
+
+Erjang installation is similarly easy:
+
+.. code:: bash
+
     $ lfetool install erjang
 
 
-Obtaining and Building
-======================
+Obtaining and Building jlfe
+===========================
 
 Download and compile ``jlfe``:
 
@@ -87,8 +94,8 @@ Download and compile ``jlfe``:
     $ rebar compile
 
 
-Usage
-=====
+jlfe Usage
+==========
 
 With everything built, you're now ready to play. To run the jlfe REPL wrapper
 
