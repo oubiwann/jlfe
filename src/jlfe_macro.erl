@@ -188,7 +188,7 @@ exp_predef([DotFun|As], _, St) when is_atom(DotFun) ->
     %io:format("Made it to jlfe_macro:exp_predef ...~n"),
     ListDotFun = atom_to_list(DotFun),
     case lists:nth(1, ListDotFun) of
-    46 ->
+    46 ->           % ASCII for the period or "."
         %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
         case string:tokens(lists:nthtail(1, ListDotFun), ":") of
         [M,F] ->
