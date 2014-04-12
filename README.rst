@@ -73,7 +73,7 @@ installed, you can install Erjang like so:
 Obtaining and Building
 ======================
 
- .. code:: bash
+.. code:: bash
 
     $ git clone https://github.com/oubiwann/jlfe.git
     $ cd jlfe
@@ -85,7 +85,7 @@ Usage
 
 With everything built, you're now ready to play. To run the jlfe REPL wrapper
 
- .. code:: bash
+.. code:: bash
 
     $ PATH=`lfetool info path` \
       ERL_LIBS=`lfetool info erllibs` \
