@@ -40,6 +40,9 @@ Under development:
 
 Planned:
 
+* Macros for short-cuts for commonly used Java libraries (such as
+  ``java.lang``).
+
 * Macros (syntax) for accessing values of nested objects.
 
 
