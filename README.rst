@@ -20,28 +20,36 @@ you wish to make your own experiments on LFE, be sure to use LFE itself.
 Features
 ========
 
-Existing:
+**Existing**
 
 * ``java.erl`` - an empty module that alleviates the user from having to
   compile a ``java.beam`` every time they want to call Erjang's
   ``java:get_static/2`` or ``java:call/4`` functions.
 
-Under development:
+**Under development**
+
+*Caveat:* the following are being tested only in the REPL; absolutely no
+effort has been made to ensure that they work when used and compile in ``.lfe``
+files.
+
+*Caveat:* for those coming from Clojure, note that even though the "dot" is
+part of the form (and not a separate form unto itself), it follows the ordering
+of the `Clojure dot form`_: instance/class, then member/method/field.
 
 * An LFE REPL wrapper that provides syntax for the following:
 
-  * ``(.instanceMember:instance args)``
+  * ``(.instance:instanceMember args)``
 
-  * ``(.instanceMember:Classname args)``
+  * ``(.Classname:instanceMember args)``
 
   * ``(.Classname:staticMethod args)``
 
   * ``(.Classname:staticField)``
 
-Planned:
+* Convenience short-cut for ``java.lang.*``: any passed Classname that is
+begins with a capital letter is prepended with ``java.lang.``.
 
-* Macros for short-cuts for commonly used Java libraries (such as
-  ``java.lang``).
+**Planned**
 
 * Macros (syntax) for accessing values of nested objects.
 
@@ -132,6 +140,13 @@ Now try out some jlfe Java syntax:
     > (.java.lang.String:getName)
     java.lang.String
 
+or
+
+.. code:: cl
+
+    > (.String:getName)
+    java.lang.String
+
 
 .. Links
 .. -----
@@ -143,3 +158,4 @@ Now try out some jlfe Java syntax:
 .. _kerl: https://github.com/spawngrid/kerl
 .. _rlwrap: http://utopia.knoware.nl/~hlub/uck/rlwrap/#rlwrap
 .. _Homebrew: http://brew.sh/
+.. _Clojure dot form: http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form
