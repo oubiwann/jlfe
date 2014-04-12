@@ -94,8 +94,8 @@ Download and compile ``jlfe``:
     $ rebar compile
 
 
-jlfe Usage
-==========
+Running the jlfe REPL
+=====================
 
 With everything built, you're now ready to play. To run the jlfe REPL wrapper
 
@@ -109,6 +109,28 @@ With everything built, you're now ready to play. To run the jlfe REPL wrapper
     $ PATH=`lfetool info path` \
       ERL_LIBS=`lfetool info erllibs` \
       $RLWRAP jerl -noshell -s jlfe_shell
+
+
+jlfe Usage
+==========
+
+Make sure the old syntax still works:
+
+.. code:: cl
+
+    > (: io format '"hey there~n" '())
+    hey there
+    ok
+    > (io:format '"hey there~n" '())
+    hey there
+    ok
+
+Now try out some jlfe Java syntax:
+
+.. code:: cl
+
+    > (.java.lang.String:getName)
+    java.lang.String
 
 
 .. Links
