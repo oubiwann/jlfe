@@ -29,10 +29,14 @@ Existing:
 Under development:
 
 * An LFE REPL wrapper that provides syntax for the following:
- * ``(.instanceMember:instance args)``
- * ``(.instanceMember:Classname args)``
- * ``(.Classname:staticMethod args)``
- * ``(.Classname:staticField)``
+
+  * ``(.instanceMember:instance args)``
+
+  * ``(.instanceMember:Classname args)``
+
+  * ``(.Classname:staticMethod args)``
+
+  * ``(.Classname:staticField)``
 
 Planned:
 
