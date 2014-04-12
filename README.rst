@@ -18,7 +18,7 @@ you wish to make your own experiments on LFE, be sure to use LFE itself.
 
 
 Features
---------
+========
 
 Existing:
 
@@ -47,36 +47,43 @@ Planned:
 
 
 Dependencies
-------------
+============
 
 This project assumes that you have `rebar`_ installed somwhere in your
-``$PATH``.
+``$PATH``. Simiarly for `lfetool`_ and `kerl`_.
 
 This project depends upon the following, which are installed to the ``deps``
-directory of this project when you run ``make deps``:
+directory of this project when you run ``rebar get-deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `lfeunit`_ (needed only to run the unit tests)
+
+Dependencies not installed automatically:
+
+* `kerl`_
+* `lfetool`_
 * `Erjang`_ (Erlang on the JVM; easily installable with `lfetool`_)
 * `rlwrap`_ (``readline`` support for the Erjang shell; installable on many
   linux distros and on Mac OS X with `Homebrew`_)
 
-Assuming you have Erlang installed with `kerl`_ and that you have `lfetool`_
-installed, you can install Erjang like so:
+Erjang installation is this easy:
 
 .. code:: bash
 
-    $ . /opt/erlang/erlang-16b/activate
+    $ . /opt/erlang/R16B/activate
     $ lfetool install erjang
 
 
 Obtaining and Building
 ======================
 
+Download and compile ``jlfe``:
+
 .. code:: bash
 
     $ git clone https://github.com/oubiwann/jlfe.git
     $ cd jlfe
+    $ rebar get-deps
     $ rebar compile
 
 
@@ -87,13 +94,14 @@ With everything built, you're now ready to play. To run the jlfe REPL wrapper
 
 .. code:: bash
 
+    $ export RLWRAP="rlwrap \
+        --command=jlfe \
+        --prompt-colour=YELLOW \
+        --histsize=100000 \
+        --remember"
     $ PATH=`lfetool info path` \
       ERL_LIBS=`lfetool info erllibs` \
-      rlwrap --command=jlfe \
-             --prompt-colour=YELLOW \
-             --histsize=100000 \
-             --remember \
-      jerl -noshell -s jlfe_shell
+      $RLWRAP jerl -noshell -s jlfe_shell
 
 
 .. Links
