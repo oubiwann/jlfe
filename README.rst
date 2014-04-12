@@ -20,21 +20,27 @@ you wish to make your own experiments on LFE, be sure to use LFE itself.
 Features
 ========
 
+
 **Existing**
 
 * ``java.erl`` - an empty module that alleviates the user from having to
   compile a ``java.beam`` every time they want to call Erjang's
   ``java:get_static/2`` or ``java:call/4`` functions.
 
+* Convenience short-cut for ``java.lang.*``: any passed Classname that begins
+  with a capital letter is prepended with ``java.lang.``.
+
+
 **Under development**
 
 *Caveat:* the following are being tested only in the REPL; absolutely no
-effort has been made to ensure that they work when used and compile in ``.lfe``
+effort has been made to ensure that they work when used and compiled in ``.lfe``
 files.
 
 *Caveat:* for those coming from Clojure, note that even though the "dot" is
 part of the form (and not a separate form unto itself), it follows the ordering
-of the `Clojure dot form`_: instance/class, then member/method/field.
+of the `Clojure dot form`_: instance/class, then member/method/field. It dos
+*not* follow the ordering for when the "dot" is part of the calling form.
 
 * An LFE REPL wrapper that provides syntax for the following:
 
@@ -46,8 +52,6 @@ of the `Clojure dot form`_: instance/class, then member/method/field.
 
   * ``(.Classname:staticField)``
 
-* Convenience short-cut for ``java.lang.*``: any passed Classname that is
-begins with a capital letter is prepended with ``java.lang.``.
 
 **Planned**
 
