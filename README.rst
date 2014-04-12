@@ -23,7 +23,7 @@ Features
 
 **Existing**
 
-* ``java.erl`` - an empty module that alleviates the user from having to
+* ``java.lfe`` - an empty module that alleviates the user from having to
   compile a ``java.beam`` every time they want to call Erjang's
   ``java:get_static/2`` or ``java:call/4`` functions.
 
