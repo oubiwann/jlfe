@@ -7,5 +7,5 @@
 
 (include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 
-(deftest my-adder
-  (is-equal 4 (: jlfe my-adder 2 2)))
+(defun noop ()
+  'noop)
