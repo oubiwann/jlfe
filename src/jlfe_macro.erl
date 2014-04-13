@@ -193,8 +193,10 @@ exp_predef([DotFun|As], _, St) when is_atom(DotFun) ->
         case string:tokens(lists:nthtail(1, ListDotFun), ":") of
         [M,F] ->
             %io:format("Made it to a good inner match in jlfe_macro:exp_predef ...~n`"),
-            %Newargs = [?Q(list_to_atom(M)),?Q(list_to_atom(F)),As],
-            Newargs = [?Q([list_to_atom(M),list_to_atom(F),As])],
+            % to pass mod, func, and list of args
+            %Newargs = [?Q([list_to_atom(M),list_to_atom(F),As])],
+            % to pass everything as a single arg:
+            Newargs = [?Q([list_to_atom(M),list_to_atom(F)] ++ As)],
             %io:format("New args: ~p~n", [Newargs]),
             {yes,[call,?Q(jlfe_java),?Q(call)|Newargs],St};
         _ ->
