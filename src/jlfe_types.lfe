@@ -18,16 +18,16 @@
     java.lang.String
     java.lang.StringBuffer))
 
-(defun java-type? (obj)
+(defun java-type? (java-object)
   (lists:member
-    (java:call obj 'getClass '() '())
+    (java:call java-object 'getClass '() '())
     (java-types)))
 
-(defun java-obj? (obj)
+(defun java-obj? (java-object)
   (lists:member
     '"java"
     (string:tokens
-      (atom_to_list (java:call obj 'getClass '() '()))
+      (atom_to_list (call java-object 'getClass))
       '".")))
 
 (defun check (java-object)
@@ -37,3 +37,11 @@
       ('true))
     )
   )
+
+(defun value-of (java-object)
+  (case (call java-object 'getClass)
+    ('java.lang.Boolean
+      (list_to_atom (call java-object 'toString)))
+    ('java.lang.Float
+      (call java-object 'doubleValue))
+    (_ java-object)))
