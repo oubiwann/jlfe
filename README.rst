@@ -21,6 +21,11 @@ Features
 ========
 
 
+*Caveat:* the following are being tested only in the REPL; absolutely no
+effort has been made to ensure that they work when used and compiled in ``.lfe``
+files.
+
+
 **Existing**
 
 * ``java.lfe`` - an empty module that alleviates the user from having to
@@ -32,10 +37,6 @@ Features
 
 
 **Under development**
-
-*Caveat:* the following are being tested only in the REPL; absolutely no
-effort has been made to ensure that they work when used and compiled in ``.lfe``
-files.
 
 *Caveat:* for those coming from Clojure, note that even though the "dot" is
 part of the form (and not a separate form unto itself), it follows the ordering
@@ -57,6 +58,8 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
 * Macros (syntax) for accessing values of nested objects.
 
+* Easier type conversion/coercion than what Erjang provides.
+
 
 Dependencies
 ============
@@ -64,8 +67,8 @@ Dependencies
 This project assumes that you have `rebar`_ installed somwhere in your
 ``$PATH``. Simiarly for `lfetool`_ and `kerl`_.
 
-This project depends upon the following, which are installed to the ``deps``
-directory of this project when you run ``rebar get-deps``:
+This project depends upon the following, which are automatically installed to
+the ``deps`` directory of this project when you run ``rebar get-deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `lfeunit`_ (needed only to run the unit tests)
