@@ -44,4 +44,6 @@
       (list_to_atom (call java-object 'toString)))
     ('java.lang.Float
       (call java-object 'doubleValue))
+    ('java.math.BigDecimal
+      (call java-object 'doubleValue))
     (_ java-object)))
