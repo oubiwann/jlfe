@@ -10,7 +10,7 @@ jlfe
 Introduction
 ============
 
-This project is 1000% experimentation. 
+This project is 1000% experimentation.
 
 Its sole purpose is to explore the possibility of slightly increasing
 programmer convenience when using LFE on Erjang (Erlang on the JVM).
@@ -41,10 +41,10 @@ regard to:
 
 #. The level of interest of these changes in the code bases of those
    projects,
-   
+
 #. Identifying the minimal set of changes necessary to provide the
    desired/acceptable functionality,
-   
+
 #. Contributing any patches to those projects that they would find
    acceptable.
 
@@ -164,6 +164,10 @@ With everything built, you're now ready to play. To run the jlfe REPL wrapper
 jlfe Usage
 ==========
 
+
+Syntax Additions
+----------------
+
 Make sure the old syntax still works:
 
 .. code:: cl
@@ -188,6 +192,42 @@ or
 
     > (.String:getName)
     java.lang.String
+
+
+Utility Functions
+-----------------
+
+Some Java types from Erjang don't render anything useful when evaluated:
+
+.. code:: cl
+
+    > (set bool (java.lang.Boolean:new 'true))
+    #B()
+    > (set flt (java.lang.Float:new 42))
+    #B()
+    > (set bigdec (java.math.BigDecimal:new 42))
+    #B()
+
+
+The ``value-of`` function let's us treat Java objects as distinct values
+while still keeping the object around, should we want to call any methods on
+it, etc.:
+
+.. code:: cl
+
+    > (jlfe_types:value-of bool)
+    true
+    > (jlfe_types:value-of flt)
+    42.0
+    > (jlfe_types:value-of bigdec)
+    42.0
+
+Types that don't need special treatment are passed through, as-is:
+
+.. code:: cl
+
+    > (jlfe_types:value-of (java.lang.Integer:new 42))
+    42
 
 
 .. Links
