@@ -2,16 +2,22 @@
 jlfe
 ####
 
-*An experimental wrapper around bits of LFE to explore the possibility of
-increasing the convenience of using Erjang (Java) from LFE.*
+*An experimental wrapper around bits of LFE*
+
+.. image:: images/logos/DukeOfferingLFE-square-tiny.png
 
 
 Introduction
 ============
 
-This project is 1000% experimentation. To even get it running required copying
-large chunks of code from LFE (code that either wasn't exported by modules or
-wasn't designed to be adapted for use by third-party libraries).
+This project is 1000% experimentation. 
+
+Its sole purpose is to explore the possibility of slightly increasing
+programmer convenience when using LFE on Erjang (Erlang on the JVM).
+
+To even get it running required copying chunks of code from LFE (code
+that either wasn't exported by modules or wasn't designed to be adapted
+for use by third-party libraries).
 
 This isn't a "use at own risk" warning; this is a "don't use" warning :-) If
 you wish to make your own experiments on LFE, be sure to use LFE itself.
