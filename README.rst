@@ -90,7 +90,7 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
   * Static class methods, fields
 
-    * ``(.Class:member)``: this will use throw/catch to distinguish between
+    * ``(.Class:member)``: this will use try/catch to distinguish between
       static method calls and static field variable access
 
     * ``(.Class:member arg-1 ... arg-N)``

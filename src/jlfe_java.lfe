@@ -106,7 +106,7 @@
     * (.Class arg-1 ... arg-N) -> constructor
     * (.Class:new) -> constructor
     * (.Class:new arg-1 ... arg-N) -> constructor
-    * (.Class:member) -> use throw/catch to distinguish between static method
+    * (.Class:member) -> use try/catch to distinguish between static method
                          calls and static field variable access
     * (.Class:member arg-1 ... arg-N)
     * (.instance:member)
@@ -126,7 +126,8 @@
   (let* (((list mod func) (parse-mod-func mod-func))
          (all (++ (list mod func) args)))
     ; (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
-    ; (lfe_io:format '"all: ~w~n" (list all))
+    ; (lfe_io:format '"all (no eval): ~w~n" (list all))
+    ; (lfe_io:format '"all: ~p~n" (list all))
     (java-call all)
     ))
 ((args)
