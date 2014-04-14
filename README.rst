@@ -167,7 +167,7 @@ directory.
 Open up the file ``./deps/lfe/src/lfe_macro.erl`` and find this function,
 somewhere around line 800:
 
-..code:: erlang
+.. code:: erlang
 
     exp_predef([Fun|As], _, St) when is_atom(Fun) ->
         case string:tokens(atom_to_list(Fun), ":") of
@@ -178,7 +178,7 @@ somewhere around line 800:
 
 Next you need to change that to the following:
 
-..code:: erlang
+.. code:: erlang
 
     exp_predef([Fun|As]=Call, _, St) when is_atom(Fun) ->
         FirstChar = lists:nth(1, atom_to_list(Fun)),
@@ -229,7 +229,7 @@ Constructors
     42.0
 
     > (.java.util.HashMap)
-()
+    ()
 
 
 Now try out some jlfe Java syntax:
