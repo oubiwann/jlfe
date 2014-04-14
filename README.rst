@@ -230,15 +230,18 @@ Constructors
 
 .. code:: cl
 
+    > (.java.util.HashMap)
+    ()
+    >
     > (.java.lang.Double 42)
     42.0
 
-    ; Or you can use the short-cut for all java.lang.* classes:
+Or you can use the short-cut for all ``java.lang.*`` classes:
+
+.. code:: cl
+
     > (.Double 42)
     42.0
-
-    > (.java.util.HashMap)
-    ()
 
 
 Static Methods
