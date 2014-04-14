@@ -199,6 +199,12 @@ exp_predef([DotFun|As], _, St) when is_atom(DotFun) ->
             Newargs = [?Q([list_to_atom(M),list_to_atom(F)] ++ As)],
             %io:format("New args: ~p~n", [Newargs]),
             {yes,[call,?Q(jlfe_java),?Q(call)|Newargs],St};
+        %% The only case we expect a dot form to not have a ":" separator is
+        %% when being used as a constructor, so we'll append a "new" here.
+        [M] ->
+            Newargs = [?Q([list_to_atom(M),new] ++ As)],
+            io:format("New args: ~p~n", [Newargs]),
+            {yes,[call,?Q(jlfe_java),?Q(call)|Newargs],St};
         _ ->
         io:format("Made it to a bad inner match in jlfe_macro:exp_predef ...~n"),
         no
