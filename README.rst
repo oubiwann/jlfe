@@ -92,6 +92,9 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
     * ``(.Class:member)`` (static field variable/constants)
 
+* Easier type conversion/coercion than what Erjang provides. (In particular,
+  ``jlfe_types:value-of``.)
+
 
 **Under development**
 
@@ -107,8 +110,6 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 **Planned**
 
 * Macros (syntax) for accessing values of nested objects.
-
-* Easier type conversion/coercion than what Erjang provides.
 
 * Allowing expressions as instance and class arguments.
 
