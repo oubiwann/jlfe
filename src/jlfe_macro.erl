@@ -172,7 +172,9 @@ exp_predef_macro(Call, Env, St) ->
     try
         Exp = exp_predef(Call, Env, St),
         case Exp of
-            no -> lfe_macro:exp_predef(Call, Env, St);
+            no ->
+                %io:format("Didn't match a jlfe exp_predef; trying lfe ...~n"),
+                lfe_macro:exp_predef(Call, Env, St);
             _ -> Exp
         end
     catch
@@ -184,31 +186,12 @@ exp_predef_macro(Call, Env, St) ->
 %% check for Java calls
 % exp_predef(['obj',M,F|As], _, St) ->
 %     {yes,['call',?Q(M),?Q(F)|As], St};
-exp_predef([DotFun|As], _, St) when is_atom(DotFun) ->
+exp_predef([DotFun|_]=Call, _, St) when is_atom(DotFun) ->
     %io:format("Made it to jlfe_macro:exp_predef ...~n"),
-    ListDotFun = atom_to_list(DotFun),
-    case lists:nth(1, ListDotFun) of
-    46 ->           % ASCII for the period or "."
+    case lists:nth(1, atom_to_list(DotFun)) of
+    46 ->                                       % ASCII for the period or "."
         %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
-        case string:tokens(lists:nthtail(1, ListDotFun), ":") of
-        [M,F] ->
-            %io:format("Made it to a good inner match in jlfe_macro:exp_predef ...~n`"),
-            % to pass mod, func, and list of args
-            %Newargs = [?Q([list_to_atom(M),list_to_atom(F),As])],
-            % to pass everything as a single arg:
-            Newargs = [?Q([list_to_atom(M),list_to_atom(F)] ++ As)],
-            %io:format("New args: ~p~n", [Newargs]),
-            {yes,[call,?Q(jlfe_java),?Q(call)|Newargs],St};
-        %% The only case we expect a dot form to not have a ":" separator is
-        %% when being used as a constructor, so we'll append a "new" here.
-        [M] ->
-            Newargs = [?Q([list_to_atom(M),new] ++ As)],
-            io:format("New args: ~p~n", [Newargs]),
-            {yes,[call,?Q(jlfe_java),?Q(call)|Newargs],St};
-        _ ->
-        io:format("Made it to a bad inner match in jlfe_macro:exp_predef ...~n"),
-        no
-        end;
+        {yes,[call,?Q(jlfe_java),?Q(call),?Q(Call)],St};
     _ ->
         %io:format("Made it to a bad outer match in jlfe_macro:exp_predef ...~n"),
         no
