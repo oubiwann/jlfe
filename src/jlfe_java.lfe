@@ -141,30 +141,7 @@
 (defun java-call (args)
   "Awwww, yeah. Who wants boiled plate for dinner?"
   (case (length args)
-    (2 (try
-         ;; The only time this is expected to fail is when a user is trying
-         ;; to :
-         ;;   * make calls such as (.String:getName) when (call ...) won't
-         ;;     cut it, or
-         ;;   * access a field variable
-         (apply #'call/2 args)
-         (catch
-           ((= error (tuple type value _)) (when (== value 'badfun))
-             ; (io:format '"Got error type: ~p~nGot error value: ~p~n"
-             ;           (list type value))
-             ;; We've gotten the error we expect when a user needs to make the
-             ;; other calls; let's try one:
-             (try
-               (apply #'java:call/4 (++ args '(() ())))
-               (catch
-                 (_
-                   ;; Looks like that didn't work; let's try the other call:
-                   (try
-                     (apply #'java:get_static/2 args)
-                     (catch
-                       ;; We don't actually care about this error, so let's error
-                       ;; the original one.
-                       (_ (error error)))))))))))
+    (2 (java-call-2-arity args))
     (3 (apply #'call/3 args))
     (4 (apply #'call/4 args))
     (5 (apply #'call/5 args))
@@ -178,3 +155,36 @@
     (13 (apply #'call/13 args))
     (14 (apply #'call/14 args))
     (15 (apply #'call/15 args))))
+
+(defun java-call-2-arity (args)
+  "This is the normal 2-arity call."
+  (try
+    ;; The only time this is expected to fail is when a user is trying
+    ;; to :
+    ;;   * make calls such as (.String:getName) when (call ...) won't
+    ;;     cut it, or
+    ;;   * access a field variable
+    (apply #'call/2 args)
+    (catch
+     ((= error (tuple type value _)) (when (== value 'badfun))
+       ; (io:format '"Got error type: ~p~nGot error value: ~p~n"
+       ;           (list type value))
+       ;; We've gotten the error we expect when a user needs to make the
+       ;; other calls; let's try one:
+       (java-static-method args error)))))
+
+(defun java-static-method (args error)
+  (try
+    (apply #'java:call/4 (++ args '(() ())))
+    (catch
+      (_
+        ;; Looks like that didn't work; let's try the other call:
+        (java-static-field args error)))))
+
+(defun java-static-field (args error)
+  (try
+    (apply #'java:get_static/2 args)
+    (catch
+      ;; We don't actually care about this error, so let's error
+      ;; the original one.
+      (_ (error error)))))
