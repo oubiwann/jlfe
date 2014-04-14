@@ -79,6 +79,15 @@ files.
 
     * ``(.Class:new arg-1 ... arg-N)``
 
+  * Static class methods, fields
+
+    * ``(.Class:member)`` (static field variable/constants)
+
+    * ``(.Class:member)`` (static method)
+
+    * ``(.Class:member arg-1 ... arg-N)`` (static method)
+
+
 **Under development**
 
 *Caveat:* for those coming from Clojure, note that even though the "dot" is
@@ -87,13 +96,6 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 *not* follow the ordering for when the "dot" is part of the calling form.
 
 * An LFE REPL wrapper that provides syntax for the following:
-
-  * Static class methods, fields
-
-    * ``(.Class:member)``: this will use try/catch to distinguish between
-      static method calls and static field variable access
-
-    * ``(.Class:member arg-1 ... arg-N)``
 
   * Instance methods
 
@@ -107,6 +109,8 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 * Macros (syntax) for accessing values of nested objects.
 
 * Easier type conversion/coercion than what Erjang provides.
+
+* Allowing expressions as instance and class arguments.
 
 
 Dependencies
@@ -236,7 +240,8 @@ Constructors
     ()
 
 
-Now try out some jlfe Java syntax:
+Static Methods
+,,,,,,,,,,,,,,
 
 .. code:: cl
 
@@ -254,6 +259,17 @@ or
 
     > (.Math:sin 0.5)
     0.479425538604203
+
+
+Static Field Variables
+,,,,,,,,,,,,,,,,,,,,,,
+
+e.g., constants:
+
+.. code:: cl
+
+    > (.Math:PI)
+    3.141592653589793
 
 
 Utility Functions

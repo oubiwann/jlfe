@@ -125,9 +125,9 @@
 (((cons mod-func args))
   (let* (((list mod func) (parse-mod-func mod-func))
          (all (++ (list mod func) args)))
-    ; (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
-    ; (lfe_io:format '"all (no eval): ~w~n" (list all))
-    ; (lfe_io:format '"all: ~p~n" (list all))
+    (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
+    (lfe_io:format '"all (no eval): ~w~n" (list all))
+    (lfe_io:format '"all: ~p~n" (list all))
     (java-call all)
     ))
 ((args)
@@ -138,8 +138,32 @@
 ;; back on this. Erlang and LFE do this some thing in a couple places :-/
 ;; PRs welcome!
 (defun java-call (args)
+  "Awwww, yeah. Who wants boiled plate for dinner?"
   (case (length args)
-    (2 (apply #'call/2 args))
+    (2 (try
+         ;; The only time this is expected to fail is when a user is trying
+         ;; to :
+         ;;   * make calls such as (.String:getName) when (call ...) won't
+         ;;     cut it, or
+         ;;   * access a field variable
+         (apply #'call/2 args)
+         (catch
+           ((= error (tuple type value _)) (when (== value 'badfun))
+             (io:format '"Got error type: ~p~nGot error value: ~p~n"
+                       (list type value))
+             ;; We've gotten the error we expect when a user needs to make the
+             ;; other calls; let's try one:
+             (try
+               (apply #'java:call/4 (++ args '(() ())))
+               (catch
+                 (_
+                   ;; Looks like that didn't work; let's try the other call:
+                   (try
+                     (apply #'java:get_static/2 args)
+                     (catch
+                       ;; We don't actually care about this error, so let's error
+                       ;; the original one.
+                       (_ (error error)))))))))))
     (3 (apply #'call/3 args))
     (4 (apply #'call/4 args))
     (5 (apply #'call/5 args))
