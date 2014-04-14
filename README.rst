@@ -94,6 +94,8 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
   * Nested classes
 
+    * ``(.OuterClass$InnerClass:member)``
+
     * ``(.OuterClass$InnerClass:member arg-1 ... arg-N)``
 
 * Easier type conversion/coercion than what Erjang provides. (In particular,
@@ -194,11 +196,10 @@ Next you need to change that to the following:
         Tokens = string:tokens(atom_to_list(Fun), ":"),
         case [FirstChar,Tokens] of
             [46,_] ->
-                %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
                 {yes,[call,?Q(jlfe_java),?Q(dispatch),?Q(Call)],St};
             [_,[M,F]] ->
                 {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
-            [_,_] -> no                                 %This will also catch a:b:c
+            [_,_] -> no                             %This will also catch a:b:c
         end;
 
 I *did* say hack ...
