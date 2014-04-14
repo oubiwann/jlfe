@@ -276,6 +276,18 @@ e.g., constants:
     > (.java.math.BigDecimal:ROUND_CEILING)
     2
 
+
+Nested Classes
+,,,,,,,,,,,,,,
+
+.. code:: cl
+
+    > (java.util.AbstractMap$SimpleEntry:new '"a" '"b")
+    #B()
+    > (.java.util.AbstractMap$SimpleEntry:new "a" "b")
+    #B()
+
+
 Utility Functions
 -----------------
 
