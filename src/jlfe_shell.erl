@@ -253,7 +253,7 @@ eval_internal(_, _) -> no.                  %Not an internal function
 %% set(Args, State) -> {yes,Result,State} | no.
 
 set([Pat,Exp], #state{curr=Ce0}=St) ->
-    Val = lfe_eval:expr(Exp, Ce0),          %Evaluate expression
+    Val = jlfe_eval:expr(Exp, Ce0),          %Evaluate expression
     case lfe_eval:match(Pat, Val, Ce0) of
     {yes,Bs} ->
         Ce1 = foldl(fun ({N,V}, E) -> add_upd_vbinding(N, V, E) end,
@@ -262,7 +262,7 @@ set([Pat,Exp], #state{curr=Ce0}=St) ->
     no -> erlang:error({badmatch,Val})
     end;
 set([Pat,['when',G],Exp], #state{curr=Ce0}=St) ->
-    Val = lfe_eval:expr(Exp, Ce0),
+    Val = jlfe_eval:expr(Exp, Ce0),
     case lfe_eval:match_when(Pat, Val, [['when'|G]], Ce0) of
     {yes,_,Bs} ->
         Ce1 = foldl(fun ({N,V}, E) -> add_upd_vbinding(N, V, E) end,
@@ -270,7 +270,9 @@ set([Pat,['when',G],Exp], #state{curr=Ce0}=St) ->
         {yes,Val,St#state{curr=Ce1}};
     no -> erlang:error({badmatch,Val})
     end;
-set(_, _) -> no.
+set(_, _) ->
+    io:format("No matches in jlfe_shell:set ..."),
+    no.
 
 %% slurp(File, State) -> {yes,{ok,Mod},State} | no.
 %%  Load in a file making all functions available. The module is
