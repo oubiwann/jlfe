@@ -15,12 +15,9 @@ This project is 1000% experimentation.
 Its sole purpose is to explore the possibility of slightly increasing
 programmer convenience when using LFE on Erjang (Erlang on the JVM).
 
-To even get it running required copying chunks of code from LFE (code
-that either wasn't exported by modules or wasn't designed to be adapted
-for use by third-party libraries).
-
-This isn't a "use at own risk" warning; this is a "don't use" warning :-) If
-you wish to make your own experiments on LFE, be sure to use LFE itself.
+Initially, chunks of LFE code were copied, but the latest version requires
+that one manually make a single change to a function (instructions below),
+and then does the rest in the jlfe code.
 
 
 Goals
@@ -142,6 +139,49 @@ Download and compile ``jlfe``:
     $ git clone https://github.com/oubiwann/jlfe.git
     $ cd jlfe
     $ rebar get-deps
+    $ rebar compile
+
+
+Hacking LFE
+===========
+
+The next step is to update a function in LFE, the LFE in your ``./deps/lfe``
+directory.
+
+Open up the file ``./deps/lfe/src/lfe_macro.erl`` and find this function,
+somewhere around line 800:
+
+..code:: erlang
+
+    exp_predef([Fun|As], _, St) when is_atom(Fun) ->
+        case string:tokens(atom_to_list(Fun), ":") of
+            [M,F] ->
+                {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
+            _ -> no                                 %This will also catch a:b:c
+        end;
+
+Next you need to change that to the following:
+
+..code:: erlang
+
+    exp_predef([Fun|As]=Call, _, St) when is_atom(Fun) ->
+        FirstChar = lists:nth(1, atom_to_list(Fun)),
+        Tokens = string:tokens(atom_to_list(Fun), ":"),
+        case [FirstChar,Tokens] of
+            [46,_] ->
+                %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
+                {yes,[call,?Q(jlfe_java),?Q(dispatch),?Q(Call)],St};
+            [_,[M,F]] ->
+                {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
+            [_,_] -> no                                 %This will also catch a:b:c
+        end;
+
+I *did* say hack ...
+
+Be sure to recompile your deps:
+
+.. code:: bash
+
     $ rebar compile
 
 
