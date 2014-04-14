@@ -67,6 +67,17 @@ files.
 * Convenience short-cut for ``java.lang.*``: any passed Classname that begins
   with a capital letter is prepended with ``java.lang.``.
 
+* An LFE REPL wrapper that provides syntax for the following:
+
+  * Constructors
+
+    * ``(.Class)``
+
+    * ``(.Class arg-1 ... arg-N)``
+
+    * ``(.Class:new)``
+
+    * ``(.Class:new arg-1 ... arg-N)``
 
 **Under development**
 
@@ -77,13 +88,18 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
 * An LFE REPL wrapper that provides syntax for the following:
 
-  * ``(.instance:instanceMember args)``
+  * Static class methods, fields
 
-  * ``(.Classname:instanceMember args)``
+    * ``(.Class:member)``: this will use throw/catch to distinguish between
+      static method calls and static field variable access
 
-  * ``(.Classname:staticMethod args)``
+    * ``(.Class:member arg-1 ... arg-N)``
 
-  * ``(.Classname:staticField)``
+  * Instance methods
+
+    * ``(.instance:member)``
+
+    * ``(.instance:member arg-1 ... arg-N)``
 
 
 **Planned**
@@ -192,14 +208,7 @@ With everything built, you're now ready to play. To run the jlfe REPL wrapper
 
 .. code:: bash
 
-    $ export RLWRAP="rlwrap \
-        --command=jlfe \
-        --prompt-colour=YELLOW \
-        --histsize=100000 \
-        --remember"
-    $ PATH=`lfetool info path` \
-      ERL_LIBS=`lfetool info erllibs` \
-      $RLWRAP jerl -noshell -s jlfe_shell
+    $ lfetool repl jlfe
 
 
 jlfe Usage
@@ -209,16 +218,19 @@ jlfe Usage
 Syntax Additions
 ----------------
 
-Make sure the old syntax still works:
+
+Constructors
+,,,,,,,,,,,,
+
 
 .. code:: cl
 
-    > (: io format '"hey there~n" '())
-    hey there
-    ok
-    > (io:format '"hey there~n" '())
-    hey there
-    ok
+    > (.Double 42)
+    42.0
+
+    > (.java.util.HashMap)
+()
+
 
 Now try out some jlfe Java syntax:
 
@@ -233,6 +245,11 @@ or
 
     > (.String:getName)
     java.lang.String
+
+.. code:: cl
+
+    > (.Math:sin 0.5)
+    0.479425538604203
 
 
 Utility Functions
