@@ -255,9 +255,7 @@ or
 
     > (.String:getName)
     java.lang.String
-
-.. code:: cl
-
+    >
     > (.Math:sin 0.5)
     0.479425538604203
 
@@ -271,7 +269,9 @@ e.g., constants:
 
     > (.Math:PI)
     3.141592653589793
-
+    >
+    > (.java.math.BigDecimal:ROUND_CEILING)
+    2
 
 Utility Functions
 -----------------
