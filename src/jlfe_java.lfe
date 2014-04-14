@@ -1,5 +1,15 @@
 (defmodule jlfe_java
-  (export all))
+  (export all)
+  (import
+    (from lists
+      (map 2)
+      (nthtail 2))
+    (from lfe-utils
+      (capitalized? 1)
+      (atom-cat 2))
+    (from string
+      (tokens 2))
+    ))
 
 (defun get-java-name(name)
   (if
@@ -7,7 +17,57 @@
       (atom_to_list name)) (lfe-utils:atom-cat 'java.lang. name)
     name))
 
-(defun call
+(defun call-old
+  (((cons mod (cons func args)))
+    (lfe_io:format
+       '"Got mod: ~p~nGot func: ~p~nGot args:~p~n"
+       (list mod func args))
+    (let ((mod (get-java-name mod)))
+      (cond
+        ;; this condition looks for things like (.String:getName) and converts
+        ;; to (.java.lang.String:getName)
+        ((capitalized? (atom_to_list mod))
+          (let ((args (++ (list mod func '()) args)))
+            (lfe_io:format '"New args: ~p~n" (list args))
+            (eval `(call ,@args))))
+        ('true
+          (eval `(call ,@args)))))))
+
+(defun get-names
+  "If the passed name doesn't have a ':' in it, there's no method/member
+  defined, so assume the 'new' method.
+
+  This function accepts a list of either one or two elements. It is expected
+  that the Java mod:fun string will be tokenized on ':' and the result of that
+  passed to this function.
+  "
+  (((cons class (cons method _)))
+    (list class method))
+  (((cons class _))
+    (list class '"new")))
+
+(defun -parse-mod-func (mod-func)
+  "Every passed mod-func will have an initial dot. If not, something has gone
+  really wrong.
+
+  Once the dot is taken care of, any one of the following could be true:
+    * no ':' divider, in which case assume 'new' and add ':new'
+    * a capital initial letter, in which case, prepend 'java.lang'
+  "
+  (let* (((list mod func) (get-names (tokens (atom_to_list mod-func) '":")))
+         (name (nthtail 1 mod)))
+    (cond
+      ((capitalized? name)
+        (list (++ '"java.lang" mod) func))
+      ('true
+        (list name func)))))
+
+(defun parse-mod-func (mod-func)
+  "Let another function do all the work. We're just gonna kick back and convert
+  the results to atoms."
+  (map #'list_to_atom/1 (-parse-mod-func mod-func)))
+
+(defun dispatch
   "Cases to consider:
     * dot forms with abbreviated Classnames
     * full dot forms (both classes and instances)
@@ -31,34 +91,64 @@
 
   With 'call':
 
-    * (call class member)
-    * (call class member arg-1 ... arg-N)
+    * (call Class member)
+    * (call Class member arg-1 ... arg-N)
     * (call instannce member)
     * (call instannce member arg-1 ... arg-N)
 
   With 'java:get_static':
 
-    * (java:get_static ...)
+    * (java:get_static Class member)
+
+  We can unify these with one syntax:
+
+    * (.Class) -> constructor
+    * (.Class arg-1 ... arg-N) -> constructor
+    * (.Class:new) -> constructor
+    * (.Class:new arg-1 ... arg-N) -> constructor
+    * (.Class:member) -> use throw/catch to distinguish between static method
+                         calls and static field variable access
+    * (.Class:member arg-1 ... arg-N)
+    * (.instance:member)
+    * (.instance:member arg-1 ... arg-N)
 
   As such, this function needs to do the following (in order):
 
-    1. Check to see if the class/instance begins with a capital letter; if so,
-       prepend 'java.lang. to it.
+    1. Call a function that:
+      a. Checks to see if there is a mod:func; if not, assume mod:new.
+      b. Checks to see if the class/instance begins with a capital letter;
+         if so, prepend 'java.lang. to it.
     2. Attempt to (call ...) with the passed args inside a try form.
     3. If this fails, try to call (java:get_static ...).
     4. If that fails, re-throw the first error.
   "
-  (((cons mod (cons func args)))
-    (lfe_io:format
-       '"Got mod: ~p~nGot func: ~p~nGot args:~p~n"
-       (list mod func args))
-    (let ((mod (get-java-name mod)))
-      (cond
-        ;; this condition looks for things like (.String:getName) and converts
-        ;; to (.java.lang.String:getName)
-        ((lfe-utils:capitalized? (atom_to_list mod))
-          (let ((args (++ (list mod func '()) args)))
-            (lfe_io:format '"New args: ~p~n" (list args))
-            (eval `(call ,@args))))
-        ('true
-          (eval `(call ,@args)))))))
+(((cons mod-func args))
+  (let* (((list mod func) (parse-mod-func mod-func))
+         (all (++ (list mod func) args)))
+    ; (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
+    ; (lfe_io:format '"all: ~w~n" (list all))
+    (java-call all)
+    ))
+((args)
+  (tuple 'error
+    (list (io_lib:format '"No match; got args: ~p~n" (list args))))))
+
+;; XXX This is one ugly hack. Counldn't get a macro to work, though, so I fell
+;; back on this. Erlang and LFE do this some thing in a couple places :-/
+;; PRs welcome!
+(defun java-call (args)
+  (case (length args)
+    (2 (apply #'call/2 args))
+    (3 (apply #'call/3 args))
+    (4 (apply #'call/4 args))
+    (5 (apply #'call/5 args))
+    (6 (apply #'call/6 args))
+    (7 (apply #'call/7 args))
+    (8 (apply #'call/8 args))
+    (9 (apply #'call/9 args))
+    (10 (apply #'call/10 args))
+    (11 (apply #'call/11 args))
+    (12 (apply #'call/12 args))
+    (13 (apply #'call/13 args))
+    (14 (apply #'call/14 args))
+    (15 (apply #'call/15 args))))
