@@ -120,6 +120,7 @@ If you don't have ``kerl`` and Erlang installed:
 
 .. code:: bash
 
+    $ lfetool install rebar
     $ lfetool install kerl
     $ lfetool install erlang R16B
     $ . /opt/erlang/R16B/activate
