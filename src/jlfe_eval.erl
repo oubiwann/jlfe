@@ -46,26 +46,26 @@ eval(E, Env) -> expr(E, Env).
 
 expr(E) -> expr(E, lfe_env:new()).
 
-expr(E, Env) ->
-    %io:format("Made it to jlfe_eval:expr ...~n"),
-    Exp = jlfe_macro:expand_expr_all(E, Env),
-    case Exp of
-    	no ->
-            %io:format("Failed jlfe macro expansion.~n"),
-            %io:format("Trying lfe macro expansion ...~n"),
-    		lfe_eval:eval_expr(lfe_macro:expand_expr_all(E, Env), Exp);
-    	_ ->
-            %io:format("Successfully expanded jlfe macro; evaluating ...~n"),
-    		lfe_eval:eval_expr(Exp, Env)
-	end.
-
 % expr(E, Env) ->
-%     Exp = lfe_macro:expand_expr_all(E, Env),
+%     %io:format("Made it to jlfe_eval:expr ...~n"),
+%     Exp = jlfe_macro:expand_expr_all(E, Env),
 %     case Exp of
-%         no ->
-%             io:format("Failed lfe macro expansion.~n"),
-%             io:format("Trying jlfe macro expansion ...~n"),
-%             lfe_eval:eval_expr(jlfe_macro:expand_expr_all(E, Env), Exp);
-%         _ ->
-%             lfe_eval:eval_expr(Exp, Env)
-%     end.
+%     	no ->
+%             %io:format("Failed jlfe macro expansion.~n"),
+%             %io:format("Trying lfe macro expansion ...~n"),
+%     		lfe_eval:eval_expr(lfe_macro:expand_expr_all(E, Env), Exp);
+%     	_ ->
+%             %io:format("Successfully expanded jlfe macro; evaluating ...~n"),
+%     		lfe_eval:eval_expr(Exp, Env)
+% 	end.
+
+expr(E, Env) ->
+    Exp = lfe_macro:expand_expr_all(E, Env),
+    case Exp of
+        no ->
+            io:format("Failed lfe macro expansion.~n"),
+            io:format("Trying jlfe macro expansion ...~n"),
+            lfe_eval:eval_expr(jlfe_macro:expand_expr_all(E, Env), Exp);
+        _ ->
+            lfe_eval:eval_expr(Exp, Env)
+    end.
