@@ -191,7 +191,7 @@ exp_predef([DotFun|_]=Call, _, St) when is_atom(DotFun) ->
     case lists:nth(1, atom_to_list(DotFun)) of
     46 ->                                       % ASCII for the period or "."
         %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
-        {yes,[call,?Q(jlfe_java),?Q(call),?Q(Call)],St};
+        {yes,[call,?Q(jlfe_java),?Q(dispatch),?Q(Call)],St};
     _ ->
         %io:format("Made it to a bad outer match in jlfe_macro:exp_predef ...~n"),
         no
