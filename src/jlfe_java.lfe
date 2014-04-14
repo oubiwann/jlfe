@@ -121,6 +121,7 @@
     2. Attempt to (call ...) with the passed args inside a try form.
     3. If this fails, try to call (java:get_static ...).
     4. If that fails, re-throw the first error.
+    5. Call a method on an instance that's a saved variable.
   "
 (((cons mod-func args))
   (let* (((list mod func) (parse-mod-func mod-func))

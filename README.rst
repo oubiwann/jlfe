@@ -60,6 +60,11 @@ files.
 
 **Existing**
 
+*Caveat:* for those coming from Clojure, note that even though the "dot" is
+part of the form (and not a separate form unto itself), it follows the ordering
+of the `Clojure dot form`_: instance/class, then member/method/field. It dos
+*not* follow the ordering for when the "dot" is part of the calling form.
+
 * ``java.lfe`` - an empty module that alleviates the user from having to
   compile a ``java.beam`` every time they want to call Erjang's
   ``java:get_static/2`` or ``java:call/4`` functions.
@@ -71,9 +76,9 @@ files.
 
   * Constructors
 
-    * ``(.Class)``
+    * ``(.Class)`` (implicit ``:new``)
 
-    * ``(.Class arg-1 ... arg-N)``
+    * ``(.Class arg-1 ... arg-N)`` (implicit ``:new``)
 
     * ``(.Class:new)``
 
@@ -81,19 +86,14 @@ files.
 
   * Static class methods, fields
 
-    * ``(.Class:member)`` (static field variable/constants)
-
     * ``(.Class:member)`` (static method)
 
     * ``(.Class:member arg-1 ... arg-N)`` (static method)
 
+    * ``(.Class:member)`` (static field variable/constants)
+
 
 **Under development**
-
-*Caveat:* for those coming from Clojure, note that even though the "dot" is
-part of the form (and not a separate form unto itself), it follows the ordering
-of the `Clojure dot form`_: instance/class, then member/method/field. It dos
-*not* follow the ordering for when the "dot" is part of the calling form.
 
 * An LFE REPL wrapper that provides syntax for the following:
 
