@@ -126,9 +126,9 @@
 (((cons mod-func args))
   (let* (((list mod func) (parse-mod-func mod-func))
          (all (++ (list mod func) args)))
-    (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
-    (lfe_io:format '"all (no eval): ~w~n" (list all))
-    (lfe_io:format '"all: ~p~n" (list all))
+    ; (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
+    ; (lfe_io:format '"all (no eval): ~w~n" (list all))
+    ; (lfe_io:format '"all: ~p~n" (list all))
     (java-call all)
     ))
 ((args)
@@ -150,8 +150,8 @@
          (apply #'call/2 args)
          (catch
            ((= error (tuple type value _)) (when (== value 'badfun))
-             (io:format '"Got error type: ~p~nGot error value: ~p~n"
-                       (list type value))
+             ; (io:format '"Got error type: ~p~nGot error value: ~p~n"
+             ;           (list type value))
              ;; We've gotten the error we expect when a user needs to make the
              ;; other calls; let's try one:
              (try
