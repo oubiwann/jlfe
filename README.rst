@@ -225,6 +225,10 @@ Constructors
 
 .. code:: cl
 
+    > (.java.lang.Double 42)
+    42.0
+
+    ; Or you can use the short-cut for all java.lang.* classes:
     > (.Double 42)
     42.0
 
@@ -259,9 +263,9 @@ Some Java types from Erjang don't render anything useful when evaluated:
 
 .. code:: cl
 
-    > (set bool (java.lang.Boolean:new 'true))
+    > (set bool (.Boolean true))
     #B()
-    > (set flt (java.lang.Float:new 42))
+    > (set flt (.Float 42))
     #B()
     > (set bigdec (java.math.BigDecimal:new 42))
     #B()
@@ -284,7 +288,7 @@ Types that don't need special treatment are passed through, as-is:
 
 .. code:: cl
 
-    > (jlfe_types:value-of (java.lang.Integer:new 42))
+    > (jlfe_types:value-of (.Integer 42))
     42
 
 
