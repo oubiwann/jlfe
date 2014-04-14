@@ -92,6 +92,10 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 
     * ``(.Class:member)`` (static field variable/constants)
 
+  * Nested classes
+
+    * ``(.OuterClass$InnerClass:member arg-1 ... arg-N)``
+
 * Easier type conversion/coercion than what Erjang provides. (In particular,
   ``jlfe_types:value-of``.)
 
