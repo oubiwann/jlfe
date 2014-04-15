@@ -6,8 +6,8 @@ Goals
 -----
 
 
-Features Development
-,,,,,,,,,,,,,,,,,,,,
+Feature Development
+,,,,,,,,,,,,,,,,,,,
 
 Provide language infrastructure/support that will:
 
