@@ -162,8 +162,6 @@ Nested Classes
 
 .. code:: cl
 
-    > (java.util.AbstractMap$SimpleEntry:new '"a" '"b")
-    #B()
     > (.java.util.AbstractMap$SimpleEntry "a" "b")
     #B()
 
