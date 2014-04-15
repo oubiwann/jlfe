@@ -82,7 +82,7 @@ That last ``make`` target will do the following:
 
 * Apply a patch to LFE to accept the jlfe form ``(.XXX ...)``, and
 
-* Compile all the dependencies.
+* Compile all the dependencies, the patched LFE, and jlfe.
 
 
 jlfe Usage
