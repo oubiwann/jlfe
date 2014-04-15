@@ -129,9 +129,9 @@
            (all (++ (list mod func) args)))
       ; XXX debug
       ; (lfe_io:format '"mod: ~w~nfunc: ~w~nargs: ~w~n" (list mod func args))
-      ; (lfe_io:format '"all (no eval): ~w~n" (list all))
-      ; (lfe_io:format '"all: ~p~n" (list all))
-      (java-call args)
+      ; (lfe_io:format '"all args: ~p~n" (list all))
+      ; (lfe_io:format '"all args, no eval: ~w~n" (list all))
+      (java-call all)
       ))
   ((args)
     (tuple 'error
@@ -153,7 +153,7 @@
 (defun java-call-multi-arity (args)
   "Awwww, yeah. Who wants boiled plate for dinner?"
   ; XXX debug
-  ;(io:format '"Arg count: ~p~nArgs: ~w~n" (list (length args) args))
+  ; (io:format '"Arg count: ~p~nArgs: ~w~n" (list (length args) args))
   (case (length args)
     (2 (java-call-2-arity args))
     (3 (apply #'call/3 args))
@@ -182,6 +182,7 @@
     (apply #'call/2 args)
     (catch
      ((= error (tuple type value _)) (when (== value 'badfun))
+       ; XXX debug
        ; (io:format '"Got error type: ~p~nGot error value: ~p~n"
        ;           (list type value))
        ;; We've gotten the error we expect when a user needs to make the
