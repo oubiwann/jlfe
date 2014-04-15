@@ -73,48 +73,11 @@ Download and compile ``jlfe``:
     $ git clone https://github.com/oubiwann/jlfe.git
     $ cd jlfe
     $ rebar get-deps
-    $ rebar compile
 
+Next we need to patch LFE to accept the jlfe syntax, the general form of
+``(.XXX ...)``. With that done, we can build everything.
 
-Hacking LFE
-===========
-
-The next step is to update a function in LFE, the LFE in your ``./deps/lfe``
-directory.
-
-Open up the file ``./deps/lfe/src/lfe_macro.erl`` and find this function,
-somewhere around line 800:
-
-.. code:: erlang
-
-    exp_predef([Fun|As], _, St) when is_atom(Fun) ->
-        case string:tokens(atom_to_list(Fun), ":") of
-            [M,F] ->
-                {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
-            _ -> no                                 %This will also catch a:b:c
-        end;
-
-Next you need to change that to the following:
-
-.. code:: erlang
-
-    exp_predef([Fun|As]=Call, _, St) when is_atom(Fun) ->
-        FirstChar = lists:nth(1, atom_to_list(Fun)),
-        Tokens = string:tokens(atom_to_list(Fun), ":"),
-        case [FirstChar,Tokens] of
-            [46,_] ->
-                {yes,[call,?Q(jlfe_java),?Q(dispatch),?Q(Call)],St};
-            [_,[M,F]] ->
-                {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
-            [_,_] -> no                             %This will also catch a:b:c
-        end;
-
-I *did* say hack ...
-
-Be sure to recompile your deps:
-
-.. code:: bash
-
+    $ make patch
     $ rebar compile
 
 
