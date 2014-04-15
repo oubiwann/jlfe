@@ -28,6 +28,9 @@ part of the form (and not a separate form unto itself), it follows the ordering
 of the `Clojure dot form`_: instance/class, then member/method/field. It dos
 *not* follow the ordering for when the "dot" is part of the calling form.
 
+Many of the existing features have demonstrated usage here:
+`README - jlfe Usage`_
+
 * ``java.lfe`` - an empty module that alleviates the user from having to
   compile a ``java.beam`` every time they want to call Erjang's
   ``java:get_static/2`` or ``java:call/4`` functions.
@@ -88,4 +91,5 @@ Planned
 .. Links
 .. -----
 
+.. `README - jlfe Usage`: https://github.com/oubiwann/jlfe/blob/master/README.rst#jlfe-usage
 .. _Clojure dot form: http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form
