@@ -33,7 +33,7 @@ Dependencies
 This project assumes that you have `rebar`_ installed somwhere in your
 ``$PATH``. Simiarly for `lfetool`_ and `kerl`_. Also, we're not going to
 cover the installation of Java -- you *will* need Java installed on your
-sysmte in order to run jlfe ;-)
+system in order to run jlfe ;-)
 
 This project depends upon the following, which are automatically installed to
 ``./deps`` when you run ``rebar get-deps``:
