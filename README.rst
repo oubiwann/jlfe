@@ -31,10 +31,12 @@ Dependencies
 ============
 
 This project assumes that you have `rebar`_ installed somwhere in your
-``$PATH``. Simiarly for `lfetool`_ and `kerl`_.
+``$PATH``. Simiarly for `lfetool`_ and `kerl`_. Also, we're not going to
+cover the installation of Java -- you *will* need Java installed on your
+sysmte in order to run jlfe ;-)
 
 This project depends upon the following, which are automatically installed to
-the ``deps`` directory of this project when you run ``rebar get-deps``:
+``./deps`` when you run ``rebar get-deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `lfeunit`_ (needed only to run the unit tests)
@@ -47,7 +49,7 @@ Dependencies not installed automatically:
 * `rlwrap`_ (``readline`` support for the Erjang shell; installable on many
   linux distros; on Mac OS X, install with `Homebrew`_)
 
-If you don't have ``kerl`` and Erlang installed:
+If you don't have ``rebar``, ``kerl`` and Erlang installed:
 
 .. code:: bash
 
