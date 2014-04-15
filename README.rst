@@ -30,10 +30,9 @@ and then does the rest in the jlfe code.
 Dependencies
 ============
 
-This project assumes that you have `rebar`_ installed somwhere in your
-``$PATH``. Simiarly for `lfetool`_ and `kerl`_. Also, we're not going to
-cover the installation of Java -- you *will* need Java installed on your
-system in order to run jlfe ;-)
+This project assumes that you have `lfetool`_ installed somwhere in your
+``$PATH``. Also, we're not going to cover the installation of Java -- you
+*will* need Java installed on your system in order to run jlfe ;-)
 
 This project depends upon the following, which are saved to ``./deps`` when
 you run ``make get-deps``:
@@ -43,7 +42,7 @@ you run ``make get-deps``:
 
 Dependencies not installed automatically:
 
-* `lfetool`_
+* `lfetool`_ (click the link for installation instructions)
 * `kerl`_ (see below)
 * `Erjang`_ (see below)
 * `rlwrap`_ (``readline`` support for the Erjang shell; installable on many
