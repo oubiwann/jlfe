@@ -91,5 +91,5 @@ Planned
 .. Links
 .. -----
 
-.. `README - jlfe Usage`: https://github.com/oubiwann/jlfe/blob/master/README.rst#jlfe-usage
+.. _README - jlfe Usage: https://github.com/oubiwann/jlfe/blob/master/README.rst#jlfe-usage
 .. _Clojure dot form: http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form
