@@ -20,111 +20,11 @@ that one manually make a single change to a function (instructions below),
 and then does the rest in the jlfe code.
 
 
-Goals
-=====
+**Development Information**
 
-Provide language infrastructure/support that will:
+* `Goals`_
 
-#. Make writing JVM-based LFE code succinct and elegant;
-
-#. Make the interactions with Java objects, types, and data a seamless experience; and
-
-#. Make LFE/Erlang hacking more alluring to adventurous Clojure hackers :-)
-
-If these experiments prove to actually make wrting LFE+Erjang code easier
-and more enjoyable (and more conceptually consistent), then discussions
-will be opened on the LFE and Erjang mailing lists (as well as IRC) with
-regard to:
-
-#. The level of interest of these changes in the code bases of those
-   projects,
-
-#. Identifying the minimal set of changes necessary to provide the
-   desired/acceptable functionality,
-
-#. Contributing any patches to those projects that they would find
-   acceptable.
-
-If, however, these experiments are *unsuccessful*, who knows?
-Perhaps more/different efforts to accomplish similar goals ...
-
-
-Features
-========
-
-Below we have classified the features as one of the following:
-
-* Existing - features that have been pushed to this repo on github.
-
-* Under development - feature that are currently being worked on; these are
-  incomplete and may be broken or may not have been pushed to the public
-  repo.
-  
-* Planned - no work has been done, but we're thinking about these.
-
-As we make progress, we will moving items from one category to another. Watch
-for changes!
-
-**Existing**
-
-*Caveat:* for those coming from Clojure, note that even though the "dot" is
-part of the form (and not a separate form unto itself), it follows the ordering
-of the `Clojure dot form`_: instance/class, then member/method/field. It dos
-*not* follow the ordering for when the "dot" is part of the calling form.
-
-* ``java.lfe`` - an empty module that alleviates the user from having to
-  compile a ``java.beam`` every time they want to call Erjang's
-  ``java:get_static/2`` or ``java:call/4`` functions.
-
-* Convenience short-cut for ``java.lang.*``: any passed Classname that begins
-  with a capital letter is prepended with ``java.lang.``.
-
-* An LFE REPL wrapper that provides syntax for the following:
-
-  * Constructors
-
-    * ``(.Class)`` (implicit ``:new``)
-
-    * ``(.Class arg-1 ... arg-N)`` (implicit ``:new``)
-
-    * ``(.Class:new)``
-
-    * ``(.Class:new arg-1 ... arg-N)``
-
-  * Static class methods, fields
-
-    * ``(.Class:member)`` (static method)
-
-    * ``(.Class:member arg-1 ... arg-N)`` (static method)
-
-    * ``(.Class:member)`` (static field variable/constants)
-
-  * Nested classes
-
-    * ``(.OuterClass$InnerClass:member)``
-
-    * ``(.OuterClass$InnerClass:member arg-1 ... arg-N)``
-
-* Easier type conversion/coercion than what Erjang provides. (In particular,
-  ``jlfe_types:value-of``.)
-
-
-**Under development**
-
-* An LFE REPL wrapper that provides syntax for the following:
-
-  * Instance methods
-
-    * ``(.instance:member)``
-
-    * ``(.instance:member arg-1 ... arg-N)``
-
-
-**Planned**
-
-* Macros (syntax) for accessing values of nested objects.
-
-* Allowing expressions as instance and class arguments.
+* `Features`_
 
 
 Dependencies
@@ -346,4 +246,5 @@ Types that don't need special treatment are passed through, as-is:
 .. _kerl: https://github.com/spawngrid/kerl
 .. _rlwrap: http://utopia.knoware.nl/~hlub/uck/rlwrap/#rlwrap
 .. _Homebrew: http://brew.sh/
-.. _Clojure dot form: http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form
+.. _Goals: doc/goals.rst
+.. _Features: doc/features.rst
