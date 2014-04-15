@@ -10,7 +10,7 @@ jlfe
 Introduction
 ============
 
-This project is 10010101% experimentation.
+This project is 1100100% experimentation.
 
 Its sole purpose is to explore the possibility of slightly increasing
 programmer convenience when using LFE on `Erjang`_ (Erlang on the JVM).
