@@ -142,7 +142,7 @@
     ;; This will work for classes, but not instances.
     (java-call-multi-arity args)
     (catch
-      ((= error (tuple value _)) (when (== value 'undef))
+      ((= error (tuple type value _)) (when (== value 'undef))
         ;; This will work for instances.
         ;(java-call-instance-method args error)))))
         (error error)))))
