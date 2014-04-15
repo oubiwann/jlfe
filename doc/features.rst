@@ -65,7 +65,7 @@ Many of the existing features have demonstrated usage here:
     * ``(.OuterClass$InnerClass:member arg-1 ... arg-N)``
 
 * Easier type conversion/coercion than what Erjang provides. (In particular,
-  ``jlfe_types:value-of``.)
+  ``jlfe-types:value-of``.)
 
 
 Under Development

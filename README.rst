@@ -184,18 +184,18 @@ it, etc.:
 
 .. code:: cl
 
-    > (jlfe_types:value-of bool)
+    > (jlfe-types:value-of bool)
     true
-    > (jlfe_types:value-of flt)
+    > (jlfe-types:value-of flt)
     42.0
-    > (jlfe_types:value-of bigdec)
+    > (jlfe-types:value-of bigdec)
     42.0
 
 Types that don't need special treatment are passed through, as-is:
 
 .. code:: cl
 
-    > (jlfe_types:value-of (.Integer 42))
+    > (jlfe-types:value-of (.Integer 42))
     42
 
 

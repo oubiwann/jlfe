@@ -1,4 +1,4 @@
-(defmodule jlfe_types
+(defmodule jlfe-types
   (export all))
 
 ; XXX add functions for checking for types and then dispatching to extract the

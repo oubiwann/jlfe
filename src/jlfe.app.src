@@ -3,9 +3,8 @@
  [{description, "An Erjang wrapper for LFE"},
   {vsn, "0.0.1"},
   {modules, [java,
-             jlfe_eval,
-             jlfe_macro,
-             jlfe_shell]},
+             'jlfe-java',
+             'jlfe-types']},
   {registered, []},
   {applications, [kernel, stdlib]}
  ]}.

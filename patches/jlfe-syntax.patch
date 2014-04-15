@@ -5,13 +5,13 @@ Subject: [PATCH] A patch fo support jlfe syntax.
 
 ---
  src/lfe_macro.erl | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/deps/lfe/src/lfe_macro.erl b/src/lfe_macro.erl
 index 493f8fc..888fe0e 100644
 --- a/deps/lfe/src/lfe_macro.erl
 +++ b/deps/lfe/src/lfe_macro.erl
-@@ -790,12 +790,18 @@ exp_predef(['MODULE'], _, St) ->
+@@ -790,12 +790,17 @@ exp_predef(['MODULE'], _, St) ->
      {yes,?Q(St#mac.module),St};
  exp_predef(['LINE'], _, St) ->
      {yes,?Q(St#mac.line),St};
@@ -23,8 +23,7 @@ index 493f8fc..888fe0e 100644
 +    Tokens = string:tokens(atom_to_list(Fun), ":"),
 +    case [FirstChar,Tokens] of
 +        [46,_] ->
-+            %io:format("Made it to a good outer match in jlfe_macro:exp_predef ...~n"),
-+            {yes,[call,?Q(jlfe_java),?Q(dispatch),?Q(Call)],St};
++            {yes,[call,?Q('jlfe-java'),?Q(dispatch),?Q(Call)],St};
 +        [_,[M,F]] ->
              {yes,[call,?Q(list_to_atom(M)),?Q(list_to_atom(F))|As],St};
 -        _ -> no                                 %This will also catch a:b:c
