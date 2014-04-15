@@ -38,10 +38,6 @@ clean-ebin:
 clean-eunit:
 	@PATH=$(SCRIPT_PATH) lfetool tests clean
 
-compile: get-deps clean-ebin
-	@echo "Compiling project code and dependencies ..."
-	@rebar compile
-
 compile-no-deps: clean-ebin
 	@echo "Compiling only project code ..."
 	@rebar compile skip_deps=true

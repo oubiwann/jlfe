@@ -35,8 +35,8 @@ This project assumes that you have `rebar`_ installed somwhere in your
 cover the installation of Java -- you *will* need Java installed on your
 system in order to run jlfe ;-)
 
-This project depends upon the following, which are automatically installed to
-``./deps`` when you run ``rebar get-deps``:
+This project depends upon the following, which are saved to ``./deps`` when
+you run ``make get-deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `lfeunit`_ (needed only to run the unit tests)
@@ -74,20 +74,15 @@ Download and get all the dependencies for it ``jlfe``:
 
     $ git clone https://github.com/oubiwann/jlfe.git
     $ cd jlfe
-    $ rebar get-deps
+    $ make compile
 
-Next we need to patch LFE to accept the jlfe syntax, the general form of
-``(.XXX ...)``:
+That last ``make`` target will do the following:
 
-.. code:: bash
+* Download all the project dependencies,
 
-    $ make patch
+* Apply a patch to LFE to accept the jlfe form ``(.XXX ...)``, and
 
-With that done, we can build everything.
-
-.. code:: bash
-
-    $ rebar compile
+* Compile all the dependencies.
 
 
 jlfe Usage
