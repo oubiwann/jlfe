@@ -52,11 +52,18 @@ Perhaps more/different efforts to accomplish similar goals ...
 Features
 ========
 
+Below we have classified the features as one of the following:
 
-*Caveat:* the following are being tested only in the REPL; absolutely no
-effort has been made to ensure that they work when used and compiled in ``.lfe``
-files.
+* Existing - features that have been pushed to this repo on github.
 
+* Under development - feature that are currently being worked on; these are
+  incomplete and may be broken or may not have been pushed to the public
+  repo.
+  
+* Planned - no work has been done, but we're thinking about these.
+
+As we make progress, we will moving items from one category to another. Watch
+for changes!
 
 **Existing**
 
