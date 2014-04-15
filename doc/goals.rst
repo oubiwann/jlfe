@@ -5,13 +5,23 @@ jlfe Development
 Goals
 -----
 
+
+Features Development
+,,,,,,,,,,,,,,,,,,,,
+
 Provide language infrastructure/support that will:
 
-#. Make writing JVM-based LFE code succinct and elegant;
+#. Make writing JVM-based LFE code **succinct** and **elegant**;
 
-#. Make the interactions with Java objects, types, and data a seamless experience; and
+#. Make the interactions with Java objects, types, and data a **seamless
+   experience**; and
 
-#. Make LFE/Erlang hacking more alluring to adventurous Clojure hackers :-)
+#. Make LFE/Erlang hacking **more alluring** to adventurous Clojure hackers
+   :-)
+
+
+Project Integrations
+,,,,,,,,,,,,,,,,,,,,
 
 If these experiments prove to actually make wrting LFE+Erjang code easier
 and more enjoyable (and more conceptually consistent), then discussions
