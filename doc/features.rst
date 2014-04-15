@@ -18,7 +18,9 @@ Below we have classified the features as one of the following:
 As we make progress, we will moving items from one category to another. Watch
 for changes!
 
-**Existing**
+
+Existing
+,,,,,,,,
 
 *Caveat:* for those coming from Clojure, note that even though the "dot" is
 part of the form (and not a separate form unto itself), it follows the ordering
@@ -62,7 +64,8 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
   ``jlfe_types:value-of``.)
 
 
-**Under development**
+Under Development
+,,,,,,,,,,,,,,,,,
 
 * An LFE REPL wrapper that provides syntax for the following:
 
@@ -73,7 +76,8 @@ of the `Clojure dot form`_: instance/class, then member/method/field. It dos
     * ``(.instance:member arg-1 ... arg-N)``
 
 
-**Planned**
+Planned
+,,,,,,,
 
 * Macros (syntax) for accessing values of nested objects.
 
