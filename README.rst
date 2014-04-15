@@ -39,6 +39,7 @@ you run ``make get-deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `lfeunit`_ (needed only to run the unit tests)
+* `lfe-utils`_
 
 Dependencies not installed automatically:
 
@@ -203,6 +204,7 @@ Types that don't need special treatment are passed through, as-is:
 .. _rebar: https://github.com/rebar/rebar
 .. _LFE: https://github.com/rvirding/lfe
 .. _lfeunit: https://github.com/lfe/lfeunit
+.. _lfe-utils: https://github.com/lfe/lfe-utils
 .. _Erjang: https://github.com/trifork/erjang
 .. _lfetool: https://github.com/lfe/lfetool/
 .. _kerl: https://github.com/spawngrid/kerl
