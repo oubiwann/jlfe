@@ -7,16 +7,17 @@ Features
 
 Below we have classified the features as one of the following:
 
-* Existing - features that have been pushed to this repo on github.
+* **Existing** - features that have been pushed to this repo on github.
 
-* Under development - feature that are currently being worked on; these are
-  incomplete and may be broken or may not have been pushed to the public
-  repo.
+* **Under Development** - feature that are currently being worked on;
+  these are incomplete and may be broken or may not have been pushed to the
+  public repo.
 
-* Planned - no work has been done, but we're thinking about these.
+* **Planned** - no work has been done, but we're thinking about these.
 
-As we make progress, we will moving items from one category to another. Watch
-for changes!
+As we make progress, we will moving items from one category to another.
+
+Watch for changes!
 
 
 Existing
