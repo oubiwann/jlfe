@@ -25,9 +25,9 @@ Goals
 
 Provide language infrastructure/support that will:
 
-#. Make writing JVM-based LFE code succinct and elegant,
+#. Make writing JVM-based LFE code succinct and elegant;
 
-#. Make the inerations with Java objects, types, and data seamless, and
+#. Make the interactions with Java objects, types, and data a seamless experience; and
 
 #. Make LFE/Erlang hacking more alluring to adventurous Clojure hackers :-)
 
