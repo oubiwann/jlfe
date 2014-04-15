@@ -68,7 +68,7 @@ Erjang installation is similarly easy:
 Obtaining and Building jlfe
 ===========================
 
-Download and get all the dependencies for it ``jlfe``:
+Building jlfe and its dependencies is as easy as this:
 
 .. code:: bash
 
