@@ -66,7 +66,7 @@ Erjang installation is similarly easy:
 Obtaining and Building jlfe
 ===========================
 
-Download and compile ``jlfe``:
+Download and get all the dependencies for it ``jlfe``:
 
 .. code:: bash
 
@@ -75,9 +75,16 @@ Download and compile ``jlfe``:
     $ rebar get-deps
 
 Next we need to patch LFE to accept the jlfe syntax, the general form of
-``(.XXX ...)``. With that done, we can build everything.
+``(.XXX ...)``:
+
+.. code:: bash
 
     $ make patch
+
+With that done, we can build everything.
+
+.. code:: bash
+
     $ rebar compile
 
 
