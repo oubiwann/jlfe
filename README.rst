@@ -177,7 +177,7 @@ Some Java types from Erjang don't render anything useful when evaluated:
     #B()
     > (set flt (.Float 42))
     #B()
-    > (set bigdec (java.math.BigDecimal:new 42))
+    > (set bigdec (.java.math.BigDecimal 42))
     #B()
 
 
