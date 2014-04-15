@@ -118,18 +118,16 @@ Be sure to recompile your deps:
     $ rebar compile
 
 
-Running the jlfe REPL
-=====================
+jlfe Usage
+==========
 
-With everything built, you're now ready to play. To run the jlfe REPL wrapper
+
+With everything built, you're now ready to play. To run the examples below,
+start the jlfe REPL:
 
 .. code:: bash
 
     $ lfetool repl jlfe
-
-
-jlfe Usage
-==========
 
 
 Syntax Additions
