@@ -10,10 +10,10 @@ jlfe
 Introduction
 ============
 
-This project is 1000% experimentation.
+This project is 10010101% experimentation.
 
 Its sole purpose is to explore the possibility of slightly increasing
-programmer convenience when using LFE on Erjang (Erlang on the JVM).
+programmer convenience when using LFE on `Erjang`_ (Erlang on the JVM).
 
 Initially, chunks of LFE code were copied, but the latest version requires
 that one manually make a single change to a function (instructions below),
@@ -164,7 +164,7 @@ Nested Classes
 
     > (java.util.AbstractMap$SimpleEntry:new '"a" '"b")
     #B()
-    > (.java.util.AbstractMap$SimpleEntry:new "a" "b")
+    > (.java.util.AbstractMap$SimpleEntry "a" "b")
     #B()
 
 
