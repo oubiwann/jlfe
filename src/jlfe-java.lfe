@@ -2,9 +2,7 @@
   (export all)
   (import
     (from lists
-      (map 2)
-      (nth 2)
-      (nthtail 2))
+      (map 2))
     (from lfe-utils
       (capitalized? 1)
       (atom-cat 2))
@@ -56,7 +54,7 @@
     * a capital initial letter, in which case, prepend 'java.lang'
   "
   (let* (((list mod func) (get-names (tokens (atom_to_list mod-func) '":")))
-         (name (nthtail 1 mod)))
+         (name (cdr mod)))
     (cond
       ((capitalized? name)
         (list (++ '"java.lang" mod) func))
@@ -144,8 +142,8 @@
     (catch
       ((= error (tuple type value _)) (when (== value 'undef))
         ;; This will work for instances.
-        ;(java-call-instance-method args error)))))
-        (error error)))))
+        (java-call-instance-method args error)))))
+        ;(error error)))))
 
 ;; XXX This is one ugly hack. Counldn't get a macro to work, though, so I fell
 ;; back on this. Erlang and LFE do this some thing in a couple places :-/
@@ -212,8 +210,22 @@
   "The function for calling members on Java instances. This is called when the
   multiple arity caller fails."
   (try
-    (java-call-multi-arity (++ (list (eval (nth 1 args))) (nthtail 1 args)))
+    ; XXX debug
+    (let* ((first (car args))
+           (rest (cdr args))
+           ;(first-eval (eval first))
+           ;(first-exp (macroexpand-all first-eval))
+           )
+      (io:format '"first: ~w~nrest: ~w~neval'ed: ~w~n: exp'ed: ~w~n"
+                 (list first rest '() '()))
+    (java-call-multi-arity (++ (list (macroexpand-all (eval (car args)))) (cdr args)))
+    )
     (catch
       ;; We don't actually care about this error, so let's error
       ;; the original one.
-      (_ (error error)))))
+      ; XXX debug
+      ((= new-error (tuple type value _))
+        (io:format '"Got error (~p, ~p): ~w~n" (list type value error))
+        (error error)
+       ))))
+      ;(_ (error error)))))

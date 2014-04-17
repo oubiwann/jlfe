@@ -1,0 +1,50 @@
+From 3eaac2ad8322e8a05e3c18bf035fe015f91fd238 Web Apr 16 17:02:41 2014
+From: Duncan McGreggor <duncan@cogitat.io>
+Date: Wed, 16 Apr 2014 17:02:41 -0700
+Subject: [PATCH] Added a workaround for the Java String errors.
+
+We've been seeing this error when trying to print Java strings in the LFE REPL:
+
+    exception error: badarg
+      in (: lfe_io_pretty print1 )
+
+This workaround is a fairly ugly hack that works for now, until we can find the
+root cause for this issue (Robert and I have had a hell of a time tracking it
+down).
+---
+ src/lfe_shell.erl | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/deps/lfe/src/lfe_shell.erl b/src/lfe_shell.erl
+index 57a50b9..b8ee32b 100644
+--- a/deps/lfe/src/lfe_shell.erl
++++ b/deps/lfe/src/lfe_shell.erl
+@@ -69,6 +69,15 @@ server(_) ->
+     St = #state{curr=Base2,local=Base2,base=Base2},
+     server_loop(St).
+ 
++%% This is a work-around for string pretty-printing of Erjang/Java
++%% java.lang.String instances not rendering properly (throwing an error).
++coerce_value(Val) when is_list(Val) ->
++    case io_lib:printable_list(Val) of
++    true -> binary_to_list(list_to_binary(Val));
++    false -> Val
++    end;
++coerce_value(Val) -> Val.
++
+ server_loop(St0) ->
+     StX = try
+           %% Read the form
+@@ -77,7 +86,8 @@ server_loop(St0) ->
+           Form = lfe_io:read(),
+           Ee1 = update_vbinding('-', Form, St0#state.curr),
+           %% Macro expand and evaluate it.
+-          {Value,St1} = eval_form(Form, St0#state{curr=Ee1}),
++          {Value0,St1} = eval_form(Form, St0#state{curr=Ee1}),
++          Value = coerce_value(Value0),
+           %% Print the result, but only to depth 30.
+           VS = lfe_io:prettyprint1(Value, 30),
+           io:requests([{put_chars,VS},nl]),
+-- 
+1.8.2
+
