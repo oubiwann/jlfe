@@ -178,7 +178,7 @@ Some Java types from Erjang don't render anything useful when evaluated:
     #B()
 
 
-The ``value-of`` function let's us treat Java objects as distinct values
+The ``value-of`` function lets us treat Java objects as distinct values
 while still keeping the object around, should we want to call any methods on
 it, etc.:
 
